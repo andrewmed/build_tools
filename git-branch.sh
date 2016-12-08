@@ -2,11 +2,11 @@
 set -e
 
 echo
-echo Commit first the changes in the target folder
+echo Commit the changes in the target folder and then start this script from repository root
 
 if [ -z "$2" ]
 then
-echo Then run: git-branch folder-name url-of-remote-repository
+echo Usage: git-branch folder-name url-of-remote-repository
 exit
 fi
 
