@@ -24,4 +24,4 @@ git reset --hard refs/original/refs/heads/master
 git remote rm origin
 
 
-:end
+echo SUCCESS!
