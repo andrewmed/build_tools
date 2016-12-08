@@ -3,6 +3,7 @@ set -e
 
 echo
 echo Commit the changes in the target folder and then start this script from repository root
+echo Do not forget to unlock ssh password for git
 
 if [ -z "$2" ]
 then
@@ -15,7 +16,7 @@ echo Press enter to continue...
 
 read
 
-git filter-branch --prune-empty --subdirectory-filter $1 HEAD
+git filter-branch -f --prune-empty --subdirectory-filter $1 HEAD
 git remote add origin $2
 git push -u origin master
 
