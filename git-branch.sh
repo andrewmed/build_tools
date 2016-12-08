@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 echo
 echo Commit the changes in the target folder and then start this script from repository root
@@ -12,9 +11,9 @@ exit
 fi
 
 echo Will be filtering directory $1 and pushing it to $2
-echo Press enter to continue...
+echo
 
-read
+set -e -x
 
 git filter-branch -f --prune-empty --subdirectory-filter $1 HEAD
 git remote add origin $2
