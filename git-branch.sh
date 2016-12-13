@@ -11,7 +11,10 @@ exit
 fi
 
 echo Will be filtering directory $1 and pushing it to $2
+echo Press Enter to start
 echo
+
+read
 
 set -e -x
 
