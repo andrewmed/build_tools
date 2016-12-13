@@ -1,25 +1,31 @@
 #!/usr/bin/env bash
 
 echo
-echo Commit the changes in the target folder and then start this script from repository root
+echo Usage:
+echo Commit changes in the target folder and then start this from repository root
 echo Do not forget to unlock ssh password for git
+echo
 
-if [ -z "$2" ]
+if [ -z "$1" ]
 then
-echo Usage: git-branch folder-name url-of-remote-repository
+echo Usage: git-branch folder-name
 exit
 fi
 
-echo Will be filtering directory $1 and pushing it to $2
-echo Press Enter to start
+REPO=git@github.com:andrewmed/${1%/}.git
+
+echo Task:
+echo Will be filtering directory $1
+echo and pushing it to $REPO
 echo
+echo Press Enter to start
 
 read
 
 set -e -x
 
 git filter-branch -f --prune-empty --subdirectory-filter $1 HEAD
-git remote add origin $2
+git remote add origin $REPO
 git push -u origin master
 
 echo Resetting back...
