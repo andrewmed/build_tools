@@ -3,7 +3,6 @@
 echo
 echo Usage:
 echo Commit changes in the target folder and then start this from repository root
-echo Do not forget to unlock ssh password for git
 echo
 
 if [ -z "$1" ]
@@ -12,8 +11,17 @@ echo Usage: git-branch folder-name
 exit
 fi
 
+ssh-add -l
+
+if [ $? -ne 0 ]
+then
+echo ERROR: Add SSH key first!
+exit
+fi
+
 REPO=git@github.com:andrewmed/${1%/}.git
 
+echo
 echo Task:
 echo Will be filtering directory $1
 echo and pushing it to $REPO
