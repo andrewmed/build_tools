@@ -1,6 +1,10 @@
-#### Running Clojure with Bazel
-One way to run Clojure is using a standard `java_binary` rule with a java wrapper invoked by a bazel macro.
+### Running Clojure with Bazel
+One way to run Clojure is via a standard `java_binary` rule with a java wrapper invoked by a bazel macro.
 
-Run with ` bazel run //build_tools/clojure/tests:one_namespace`
+#### Documentation
+The default namespace is `core` and the main method is `-main` (like in Leinigen)
 
-*TODO: Namespaces*
+See usage examples in [tests](tests/BUILD)
+
+#### TODO
+Namespaces
