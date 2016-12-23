@@ -1,24 +1,16 @@
-ls -la *
-
-touch $1
-
+#!/usr/bin/env bash
 envsubst > $1 <<EOF
 
 import clojure.lang.RT;
-import clojure.lang.IFn;
+import clojure.lang.Var;
 import clojure.lang.Symbol;
-import clojure.java.api.Clojure;
 
-
-public class Wrapper {
+public class `basename $1 .java` {
     public static void main(String[] args) throws Exception {
-        RT.var("clojure.core", "require").invoke(Symbol.intern("$2"));
-        RT.var("$2", "$3").applyTo(RT.seq(args));
-//        IFn require = Clojure.var("clojure.core", "require");
-//       require.invoke(Clojure.read("start"));
-//        IFn start = Clojure.var("start", "-main");
-//        start.invoke(args);
+        String main = "$2";
+        RT.var("clojure.core", "require").invoke(Symbol.intern(main));
+        Var.pushThreadBindings(RT.map(RT.var("clojure.core", "*ns*"), main));
+        RT.var(main, "$3").applyTo(RT.seq(args));
     }
 }
-
 EOF
